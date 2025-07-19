@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在庫管理システム - デモ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- サイドバー -->
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h4 class="text-white">在庫管理システム</h4>
+                        <small class="text-muted">デモ版</small>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="dashboard.html">
+                                <i class="fas fa-tachometer-alt"></i> ダッシュボード
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="customers.html">
+                                <i class="fas fa-users"></i> 顧客管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="invoices.html">
+                                <i class="fas fa-file-invoice"></i> 伝票管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="orders.html">
+                                <i class="fas fa-shopping-cart"></i> 注文管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="payments.html">
+                                <i class="fas fa-money-bill-wave"></i> 入金管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="sales.html">
+                                <i class="fas fa-chart-bar"></i> 売上集計
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- メインコンテンツ -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">在庫管理システム デモ</h1>
+                </div>
+
+                <!-- ウェルカムメッセージ -->
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">
+                        <i class="fas fa-info-circle"></i> デモ版について
+                    </h4>
+                    <p>このデモ版では、在庫管理システムの各機能の画面を確認できます。実際のデータ操作は行われません。</p>
+                </div>
+
+                <!-- 機能一覧 -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-tachometer-alt fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">ダッシュボード</h5>
+                                <p class="card-text">システム全体の概要とサマリー情報を表示します。</p>
+                                <a href="dashboard.html" class="btn btn-primary">表示</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-users fa-3x text-success mb-3"></i>
+                                <h5 class="card-title">顧客管理</h5>
+                                <p class="card-text">顧客情報の登録・編集・削除・検索とCPM分析機能。</p>
+                                <a href="customers.html" class="btn btn-success">表示</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-file-invoice fa-3x text-warning mb-3"></i>
+                                <h5 class="card-title">伝票管理</h5>
+                                <p class="card-text">売上伝票の作成・編集・削除・検索機能。</p>
+                                <a href="invoices.html" class="btn btn-warning">表示</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-shopping-cart fa-3x text-info mb-3"></i>
+                                <h5 class="card-title">注文管理</h5>
+                                <p class="card-text">注文の処理・履歴管理・CSV取込機能。</p>
+                                <a href="orders.html" class="btn btn-info">表示</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-money-bill-wave fa-3x text-danger mb-3"></i>
+                                <h5 class="card-title">入金管理</h5>
+                                <p class="card-text">入金情報の記録・管理・検索機能。</p>
+                                <a href="payments.html" class="btn btn-danger">表示</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-chart-bar fa-3x text-secondary mb-3"></i>
+                                <h5 class="card-title">売上集計</h5>
+                                <p class="card-text">売上データの集計・分析・グラフ表示。</p>
+                                <a href="sales.html" class="btn btn-secondary">表示</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 技術仕様 -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>技術仕様</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>フロントエンド</h6>
+                                        <ul>
+                                            <li>HTML5</li>
+                                            <li>CSS3 (Bootstrap 5.1.3)</li>
+                                            <li>JavaScript (ES6+)</li>
+                                            <li>Chart.js (グラフ表示)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>バックエンド (実際のシステム)</h6>
+                                        <ul>
+                                            <li>PHP 8.0+</li>
+                                            <li>SQLite データベース</li>
+                                            <li>MVCアーキテクチャ</li>
+                                            <li>PDO (データベース接続)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 機能説明 -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>主要機能</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>データ管理機能</h6>
+                                        <ul>
+                                            <li>顧客情報のCRUD操作</li>
+                                            <li>伝票・注文・入金の管理</li>
+                                            <li>検索・フィルタリング機能</li>
+                                            <li>CSVファイル取込・エクスポート</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>分析・レポート機能</h6>
+                                        <ul>
+                                            <li>CPM分析（顧客購買パターン）</li>
+                                            <li>売上集計（日別・月別・顧客別・商品別）</li>
+                                            <li>グラフ表示（Chart.js）</li>
+                                            <li>ダッシュボード表示</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

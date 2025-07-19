@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注文管理 - 在庫管理システム</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- サイドバー -->
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h4 class="text-white">在庫管理システム</h4>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.html">
+                                <i class="fas fa-tachometer-alt"></i> ダッシュボード
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="customers.html">
+                                <i class="fas fa-users"></i> 顧客管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="invoices.html">
+                                <i class="fas fa-file-invoice"></i> 伝票管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="orders.html">
+                                <i class="fas fa-shopping-cart"></i> 注文管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="payments.html">
+                                <i class="fas fa-money-bill-wave"></i> 入金管理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="sales.html">
+                                <i class="fas fa-chart-bar"></i> 売上集計
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- メインコンテンツ -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">注文管理</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addOrderModal">
+                            <i class="fas fa-plus"></i> 新規注文作成
+                        </button>
+                        <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#importCSVModal">
+                            <i class="fas fa-file-csv"></i> CSV取込
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 検索フォーム -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form method="GET" action="">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="form-label">顧客ID</label>
+                                    <input type="number" class="form-control" name="customer_id" value="">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">商品名</label>
+                                    <input type="text" class="form-control" name="product_name" value="">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">開始日</label>
+                                    <input type="date" class="form-control" name="start_date" value="">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">終了日</label>
+                                    <input type="date" class="form-control" name="end_date" value="">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">注文タイプ</label>
+                                    <select class="form-control" name="is_online_order">
+                                        <option value="">すべて</option>
+                                        <option value="1">オンライン</option>
+                                        <option value="0">店舗</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">&nbsp;</label>
+                                    <div>
+                                        <button type="submit" class="btn btn-secondary">
+                                            <i class="fas fa-search"></i> 検索
+                                        </button>
+                                        <a href="orders.html" class="btn btn-outline-secondary">リセット</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 注文一覧 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5>注文一覧</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>顧客名</th>
+                                        <th>商品名</th>
+                                        <th>数量</th>
+                                        <th>単価</th>
+                                        <th>合計金額</th>
+                                        <th>注文日</th>
+                                        <th>ステータス</th>
+                                        <th>タイプ</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>田中太郎</td>
+                                        <td>ノートパソコン</td>
+                                        <td>2</td>
+                                        <td>¥90,000</td>
+                                        <td>¥180,000</td>
+                                        <td>2024-12-19</td>
+                                        <td>
+                                            <span class="badge bg-success">完了</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-info">オンライン</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="editItem(1, '注文')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" onclick="deleteItem(1, '注文')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>佐藤花子</td>
+                                        <td>スマートフォン</td>
+                                        <td>1</td>
+                                        <td>¥85,000</td>
+                                        <td>¥85,000</td>
+                                        <td>2024-12-18</td>
+                                        <td>
+                                            <span class="badge bg-warning">処理中</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-secondary">店舗</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="editItem(2, '注文')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" onclick="deleteItem(2, '注文')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>鈴木一郎</td>
+                                        <td>タブレット</td>
+                                        <td>3</td>
+                                        <td>¥40,000</td>
+                                        <td>¥120,000</td>
+                                        <td>2024-12-17</td>
+                                        <td>
+                                            <span class="badge bg-success">完了</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-info">オンライン</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="editItem(3, '注文')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" onclick="deleteItem(3, '注文')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>高橋美咲</td>
+                                        <td>ワイヤレスイヤホン</td>
+                                        <td>5</td>
+                                        <td>¥5,000</td>
+                                        <td>¥25,000</td>
+                                        <td>2024-12-16</td>
+                                        <td>
+                                            <span class="badge bg-secondary">キャンセル</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-secondary">店舗</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="editItem(4, '注文')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" onclick="deleteItem(4, '注文')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>伊藤健太</td>
+                                        <td>モニター</td>
+                                        <td>1</td>
+                                        <td>¥45,000</td>
+                                        <td>¥45,000</td>
+                                        <td>2024-12-15</td>
+                                        <td>
+                                            <span class="badge bg-success">完了</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-info">オンライン</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="editItem(5, '注文')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" onclick="deleteItem(5, '注文')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 新規注文作成モーダル -->
+                <div class="modal fade" id="addOrderModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">新規注文作成</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <form id="addOrderForm">
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="customer_id" class="form-label">顧客ID *</label>
+                                        <input type="number" class="form-control" id="customer_id" name="customer_id" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="product_name" class="form-label">商品名 *</label>
+                                        <input type="text" class="form-control" id="product_name" name="product_name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="quantity" class="form-label">数量 *</label>
+                                        <input type="number" class="form-control" id="quantity" name="quantity" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="unit_price" class="form-label">単価 *</label>
+                                        <input type="number" step="0.01" class="form-control" id="unit_price" name="unit_price" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="order_date" class="form-label">注文日 *</label>
+                                        <input type="date" class="form-control" id="order_date" name="order_date" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="status" class="form-label">ステータス *</label>
+                                        <select class="form-control" id="status" name="status" required>
+                                            <option value="pending">保留</option>
+                                            <option value="processing">処理中</option>
+                                            <option value="completed">完了</option>
+                                            <option value="cancelled">キャンセル</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="is_online_order" name="is_online_order" value="1">
+                                            <label class="form-check-label" for="is_online_order">
+                                                オンライン注文
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                                    <button type="submit" class="btn btn-primary">作成</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CSV取込モーダル -->
+                <div class="modal fade" id="importCSVModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">CSVファイル取込</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <form id="importCSVForm" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="csv_file" class="form-label">CSVファイル *</label>
+                                        <input type="file" class="form-control" id="csv_file" name="csv_file" accept=".csv" required>
+                                    </div>
+                                    <div class="alert alert-info">
+                                        <h6>CSVファイル形式:</h6>
+                                        <p>顧客ID,商品名,数量,単価,注文日,ステータス,オンライン注文(0/1)</p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                                    <button type="submit" class="btn btn-success">取込</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
